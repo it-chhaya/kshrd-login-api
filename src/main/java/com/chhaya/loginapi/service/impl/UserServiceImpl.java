@@ -4,16 +4,18 @@ import com.chhaya.loginapi.repository.UserRepository;
 import com.chhaya.loginapi.service.UserService;
 import com.chhaya.loginapi.shared.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
         System.out.println(userDto);
 
-        return null;
+        return new User(userDto.getEmail(), userDto.getPassword(), new ArrayList<>());
 
     }
 
